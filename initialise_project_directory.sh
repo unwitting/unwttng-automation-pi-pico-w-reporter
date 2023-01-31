@@ -10,7 +10,7 @@ if [ "$(ls -A .)" ]; then
 fi
 
 echo "Downloading code bundle..."
-curl "$CODE_BUNDLE_URL" -o "$CODE_BUNDLE_FILENAME"
+curl -L -o "$CODE_BUNDLE_FILENAME" "$CODE_BUNDLE_URL"
 
 echo "Extracting code bundle..."
 tar -xzf "$CODE_BUNDLE_FILENAME"
