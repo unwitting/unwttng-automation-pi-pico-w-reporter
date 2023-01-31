@@ -1,5 +1,5 @@
-CODE_BUNDLE_URL="https://github.com/unwitting/unwttng-automation-pi-pico-w-reporter/archive/refs/heads/main.zip"
-CODE_BUNDLE_FILENAME="code.tar.gz"
+export CODE_BUNDLE_URL="https://github.com/unwitting/unwttng-automation-pi-pico-w-reporter/archive/refs/heads/main.zip"
+export CODE_BUNDLE_FILENAME="code.tar.gz"
 
 if [ "$(ls -A .)" ]; then
     echo "Current directory is not empty, aborting..."
