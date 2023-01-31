@@ -1,4 +1,4 @@
-CODE_BUNDLE_URL="https://github.com/unwitting/unwttng-automation-pi-pico-w-reporter/archive/refs/tags/latest.tar.gz"
+CODE_BUNDLE_URL="https://github.com/unwitting/unwttng-automation-pi-pico-w-reporter/archive/refs/heads/main.zip"
 CODE_BUNDLE_FILENAME="code.tar.gz"
 
 if [ "$(ls -A .)" ]; then

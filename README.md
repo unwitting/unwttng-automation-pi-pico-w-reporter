@@ -7,7 +7,7 @@ A skeleton general-purpose data reporting project. Made to run on the **Raspberr
 Create an empty project directory, let's say `my-new-reporter`. `cd` into it.
 
 ```bash
-curl https://raw.githubusercontent.com/unwitting/unwttng-automation-pi-pico-w-reporter/latest/initialise_project_directory.sh | bash
+curl https://raw.githubusercontent.com/unwitting/unwttng-automation-pi-pico-w-reporter/main/initialise_project_directory.sh | bash
 ```
 
 This will set up a project directory with the base code to get started.
