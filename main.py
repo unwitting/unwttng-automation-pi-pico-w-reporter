@@ -2,15 +2,28 @@ from secrets import secrets
 from reporter import Reporter
 
 import sensor_module_aht20
+import sensor_module_adafruit_stemma_soil
+
+import board
+import busio
+
+SDA = board.GP0
+SCL = board.GP1
+i2c = busio.I2C(SCL, SDA)
 
 
-# def get_state():
-#     return [
-#         ("test-state-1", 1.0, "celcius"),
-#         ("test-state-2", 23789347, None),
-#         ("test-state-3", -3.4, "percent"),
-#     ]
+sensors = [
+    {
+        "sensor_hardware": "aht20",
+        "sensor_module": sensor_module_aht20,
+        "i2c": i2c,
+    },
+    {
+        "sensor_hardware": "adafruit_stemma_soil",
+        "sensor_module": sensor_module_adafruit_stemma_soil,
+        "i2c": i2c,
+    },
+]
 
-
-r = Reporter(secrets, sensor_module_aht20.get_state)
+r = Reporter(secrets, sensors)
 r.run()

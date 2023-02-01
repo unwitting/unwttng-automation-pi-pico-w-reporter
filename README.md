@@ -61,6 +61,9 @@ secrets = {
 
     # A location string (a/string/with/optional/slashes) denoting the physical location of the sensors
     "REPORT_STATE_SENSOR_LOCATION": "testlocation1",
+
+    # How many seconds between sensor polls?
+    "POLL_INTERVAL": 10,
 }
 ```
 
