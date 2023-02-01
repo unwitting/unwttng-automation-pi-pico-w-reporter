@@ -92,10 +92,14 @@ Report interval: {self.secrets['POLL_INTERVAL']}s
                 del state["unit"]
 
         try:
+            print("Sending state to remote")
+            print(f'URL: {self.secrets["REMOTE_REPORT_STATE_URL"]}')
+            print(f"Payload: {json.dumps(payload)}")
             with self.requests.post(
                 self.secrets["REMOTE_REPORT_STATE_URL"],
                 json=payload,
             ) as r:
+                print("Response received")
                 if r.status_code == 200:
                     print("State reported successfully")
                     for state in payload["state"]:
@@ -110,6 +114,7 @@ Report interval: {self.secrets['POLL_INTERVAL']}s
                     return False
         except Exception as e:
             print(f"Error reporting state: {e}")
+            print(e)
             return False
 
     def run(self):
