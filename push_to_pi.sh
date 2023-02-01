@@ -8,10 +8,16 @@ else
     exit 1
 fi
 
+
 echo "Removing old files..."
 for file in $MANAGED_FILES; do
     echo "  Removing $file..."
     rm -rf "$CIRCUITPY_VOLUME"/$file
+done
+
+SENSOR_MODULES=$(python -c 'import secrets; print(" ".join(secrets.secrets["SENSOR_MODULES"]))')
+for module in $SENSOR_MODULES; do
+    ./add_sensor_module.sh $module
 done
 
 echo "Copying new files..."

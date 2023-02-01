@@ -24,19 +24,6 @@ From here, you can:
 
 to install the correct firmware onto a Pi Pico in bootloader mode.
 
-### Add sensor modules
-
-For each sensor module you'd like to install, run:
-
-```bash
-./add_sensor_module.sh <module_id>
-```
-
-where module ID is one of the supported sensors:
-
-* `aht20`: AHT20 temperature & humidity sensor
-* `adafruit_stemma_soil`: Adafruit's STEMMA capacitive soil sensor
-
 ### Configure with secrets.py
 
 You'll need to create one file yourself: `secrets.py`, in the root of the project.
@@ -65,8 +52,19 @@ secrets = {
 
     # How many seconds between sensor polls?
     "POLL_INTERVAL": 10,
+
+    # Which sensors should be installed and run?
+    "SENSOR_MODULES": [
+        "aht20",
+        "adafruit_stemma_soil",
+    ],
 }
 ```
+
+The `SENSOR_MODULES` key should use values from the list of supported sensors:
+
+* `aht20`: AHT20 temperature & humidity sensor
+* `adafruit_stemma_soil`: Adafruit's STEMMA capacitive soil sensor
 
 ### Run on the Pi
 
