@@ -64,7 +64,6 @@ Report interval: {self.secrets['POLL_INTERVAL']}s
 
     def report_state(self, state):
         print("Reporting state to remote")
-        now = adafruit_datetime.datetime.now().isoformat()
 
         payload_state = []
         for sensor_hardware, sensor_state in state:
@@ -73,7 +72,6 @@ Report interval: {self.secrets['POLL_INTERVAL']}s
                     {
                         "location": self.secrets["REPORT_STATE_SENSOR_LOCATION"],
                         "sensorHardware": sensor_hardware,
-                        "timestamp": now,
                         "name": name,
                         "value": value,
                         "unit": unit,
