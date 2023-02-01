@@ -35,6 +35,7 @@ For each sensor module you'd like to install, run:
 where module ID is one of the supported sensors:
 
 * `aht20`: AHT20 temperature & humidity sensor
+* `adafruit_stemma_soil`: Adafruit's STEMMA capacitive soil sensor
 
 ### Configure with secrets.py
 
