@@ -7,6 +7,9 @@ import supervisor
 import adafruit_requests
 
 
+INDICATOR_FLASH_PERIOD = 0.05
+
+
 class Reporter:
     def __init__(self, secrets, sensors, indicator_led=None):
         self.secrets = secrets
@@ -24,14 +27,6 @@ Report interval: {self.secrets['POLL_INTERVAL']}s
         """
         )
         self._set_up_wifi()
-
-    def _led_on(self):
-        if self.indicator_led:
-            self.indicator_led.value = True
-
-    def _led_off(self):
-        if self.indicator_led:
-            self.indicator_led.value = False
 
     def _set_up_wifi(self):
         print("- WiFi ---")
@@ -128,8 +123,9 @@ Report interval: {self.secrets['POLL_INTERVAL']}s
     def run(self):
         try:
             while True:
-                self._led_on()
                 print("- Loop ---")
+                if self.indicator_led:
+                    self.indicator_led.flash(INDICATOR_FLASH_PERIOD)
 
                 state = []
                 for sensor in self.sensors:
@@ -142,8 +138,14 @@ Report interval: {self.secrets['POLL_INTERVAL']}s
 
                 self.report_state(state)
                 print("----------\n")
-                self._led_off()
-                time.sleep(self.secrets["POLL_INTERVAL"])
+
+                time.sleep(
+                    max(
+                        self.secrets["POLL_INTERVAL"]
+                        - (INDICATOR_FLASH_PERIOD if self.indicator_led else 0),
+                        0,
+                    )
+                )
         except Exception as e:
             print(f"Error in main run loop: {e}")
             print("Restarting after 60 seconds")

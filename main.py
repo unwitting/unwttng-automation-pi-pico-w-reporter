@@ -4,6 +4,7 @@ from reporter import Reporter
 
 import board
 import busio
+import time
 
 SDA = board.GP0
 SCL = board.GP1
@@ -15,6 +16,23 @@ if "INDICATOR_LED_PIN" in secrets:
 
     indicator_led = digitalio.DigitalInOut(getattr(board, secrets["INDICATOR_LED_PIN"]))
     indicator_led.direction = digitalio.Direction.OUTPUT
+
+
+class IndicatorLed:
+    def __init__(self, led):
+        self.led = led
+
+    def flash(self, period):
+        # Fake a PWM that's mostly off, since the LED is too bright
+        now = time.monotonic()
+        while time.monotonic() - now < period:
+            self.led.value = True
+            time.sleep(0.0001)
+            self.led.value = False
+            time.sleep(0.002)
+
+
+indicator_led = IndicatorLed(indicator_led) if indicator_led else None
 
 
 sensors = []
