@@ -65,6 +65,7 @@ The `SENSOR_MODULES` key should use values from the list of supported sensors:
 
 * `aht20`: AHT20 temperature & humidity sensor
 * `adafruit_stemma_soil`: Adafruit's STEMMA capacitive soil sensor
+* `ms8607`: MS8607 temperature, pressure & humidity sensor
 
 ### Run on the Pi
 

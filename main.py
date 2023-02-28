@@ -31,6 +31,16 @@ if "adafruit_stemma_soil" in secrets["SENSOR_MODULES"]:
             "i2c": i2c,
         }
     )
+if "ms8607" in secrets["SENSOR_MODULES"]:
+    import sensor_module_ms8607
+
+    sensors.append(
+        {
+            "sensor_hardware": "ms8607",
+            "sensor_module": sensor_module_ms8607,
+            "i2c": i2c,
+        }
+    )
 
 r = Reporter(secrets, sensors)
 r.run()
