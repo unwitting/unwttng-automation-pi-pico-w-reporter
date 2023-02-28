@@ -58,6 +58,9 @@ secrets = {
         "aht20",
         "adafruit_stemma_soil",
     ],
+
+    # Which pin if any should I use as an indicator LED?
+    "INDICATOR_LED_PIN": "GP28",
 }
 ```
 

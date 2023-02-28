@@ -5,13 +5,13 @@ import json
 import time
 import supervisor
 import adafruit_requests
-import adafruit_datetime
 
 
 class Reporter:
-    def __init__(self, secrets, sensors):
+    def __init__(self, secrets, sensors, indicator_led=None):
         self.secrets = secrets
         self.sensors = sensors
+        self.indicator_led = indicator_led
         print(
             f"""
 
@@ -24,6 +24,14 @@ Report interval: {self.secrets['POLL_INTERVAL']}s
         """
         )
         self._set_up_wifi()
+
+    def _led_on(self):
+        if self.indicator_led:
+            self.indicator_led.value = True
+
+    def _led_off(self):
+        if self.indicator_led:
+            self.indicator_led.value = False
 
     def _set_up_wifi(self):
         print("- WiFi ---")
@@ -120,6 +128,7 @@ Report interval: {self.secrets['POLL_INTERVAL']}s
     def run(self):
         try:
             while True:
+                self._led_on()
                 print("- Loop ---")
 
                 state = []
@@ -133,6 +142,7 @@ Report interval: {self.secrets['POLL_INTERVAL']}s
 
                 self.report_state(state)
                 print("----------\n")
+                self._led_off()
                 time.sleep(self.secrets["POLL_INTERVAL"])
         except Exception as e:
             print(f"Error in main run loop: {e}")

@@ -9,6 +9,13 @@ SDA = board.GP0
 SCL = board.GP1
 i2c = busio.I2C(SCL, SDA)
 
+indicator_led = None
+if "INDICATOR_LED_PIN" in secrets:
+    import digitalio
+
+    indicator_led = digitalio.DigitalInOut(getattr(board, secrets["INDICATOR_LED_PIN"]))
+    indicator_led.direction = digitalio.Direction.OUTPUT
+
 
 sensors = []
 if "aht20" in secrets["SENSOR_MODULES"]:
@@ -42,5 +49,5 @@ if "ms8607" in secrets["SENSOR_MODULES"]:
         }
     )
 
-r = Reporter(secrets, sensors)
+r = Reporter(secrets, sensors, indicator_led=indicator_led)
 r.run()
